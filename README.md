@@ -12,5 +12,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Todo
 
 1. Alterar arquivo src/App.js
-2. Commitar e subir as altera??es
+2. Commitar e subir as alteracoes
 
