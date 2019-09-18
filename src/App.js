@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import './App.scss';
 import '@material/react-top-app-bar/dist/top-app-bar.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import TopAppBar, {

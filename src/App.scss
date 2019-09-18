@@ -1,0 +1,17 @@
+
+/*using css only*/
+.mdc-top-app-bar {
+    background-color: red !important;
+}
+
+.blueIcon {
+    color: blue !important;
+}
+
+
+
+
+//using sass
+//.mdc-top-app-bar {
+//  @include mdc-top-app-bar-fill-color(#0000ff);
+//}
