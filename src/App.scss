@@ -1,7 +1,17 @@
 
 /*using css only*/
 .mdc-top-app-bar {
-    background-color: red !important;
+    background-color: white !important;
+}
+
+.mdc-top-app-bar .mdc-top-app-bar__action-item, .mdc-top-app-bar .mdc-top-app-bar__navigation-icon {
+    color: #969696 !important;
+}
+
+.mdc-top-app-bar__title {
+    color: #969696 !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.1em !important;
 }
 
 .blueIcon {

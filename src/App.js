@@ -52,10 +52,10 @@ function App() {
                     </div>
 
                     <div className='col-2 p-3' align='center'>
-                            <button type="button" class="btn btn-primary btn-sm" id="toggle-btn"><i class="material-icons">compare_arrows</i></button>
+                            <button type="button" className="btn btn-primary btn-sm" id="toggle-btn"><i className="material-icons">compare_arrows</i></button>
                     </div>
 
-                    <div className='col-5' align='center'>
+                    <div className='col-5 p-0' align='center'>
                         <DropdownButton id="dropdown-basic-button" title="Dropdown button">
                             <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>

@@ -16,7 +16,8 @@
 .material-icons {
     color: #969696;
     padding: 1px;
-    font-size: 20px;
+    font-size: 22px;
+    margin-top: 4px;
 }
 
 #toggle-btn {
