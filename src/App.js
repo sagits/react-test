@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import '@material/react-top-app-bar/dist/top-app-bar.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import TopAppBar, {
@@ -21,15 +21,16 @@ function App() {
               <TopAppBarRow>
                   <TopAppBarSection align='start'>
                       <TopAppBarIcon navIcon tabIndex={0}>
-                          <MaterialIcon hasRipple icon='menu' onClick={() => console.log('click')}/>
+                          <MaterialIcon className="blueIcon" hasRipple icon='menu' onClick={() => console.log('click')}/>
                       </TopAppBarIcon>
-                      <TopAppBarTitle>I loved your new haircut</TopAppBarTitle>
+                      <TopAppBarTitle>Kratos also loved your new haircut</TopAppBarTitle>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
                       <TopAppBarIcon actionItem tabIndex={0}>
                           <MaterialIcon
                               aria-label="print page"
                               hasRipple
+                              className="blueIcon"
                               icon='print'
                               onClick={() => console.log('print')}
                           />
