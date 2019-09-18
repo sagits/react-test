@@ -5,7 +5,11 @@
   "dependencies": {
     "@material/react-material-icon": "^0.15.0",
     "@material/react-top-app-bar": "^0.15.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
     "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1"
   },

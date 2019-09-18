@@ -1,0 +1,25 @@
+
+#selectors-box{
+    background-color: #1a73e8;
+}
+
+#selectors-btn {
+    padding: 10px;
+}
+
+#dropdown-basic-button {
+    padding: 10px;
+    color: #969696;
+    background-color: white;
+}
+
+.material-icons {
+    color: #969696;
+    padding: 1px;
+    font-size: 20px;
+}
+
+#toggle-btn {
+    border-radius: 50%;
+    background-color: white;
+}
