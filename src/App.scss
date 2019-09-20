@@ -1,3 +1,17 @@
+@media only screen and (max-width: 428px) {
+
+    #dropdown-basic-button {
+        max-width: 95%;
+        font-size: 85%;
+    }
+
+    .col-5 {
+        padding: 0px;
+    }
+    .col-5 {
+        padding: 1px;
+    }
+}
 
 .mdc-top-app-bar {
     background-color: white !important;
@@ -14,11 +28,8 @@
 }
 
 
-#selectors-box{
+#dropdowns-box{
     background-color: #1a73e8;
-}
-
-#selectors-btn {
     padding: 10px;
 }
 
