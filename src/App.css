@@ -1,10 +1,12 @@
 
-#selectors-box{
-    background-color: #1a73e8;
+@media only screen and (max-width: 428px) {
+    .btn {
+        size: sm;
+    }
 }
 
-#selectors-btn {
-    padding: 10px;
+#selectors-box{
+    background-color: #1a73e8;
 }
 
 #dropdown-basic-button {

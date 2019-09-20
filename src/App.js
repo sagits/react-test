@@ -41,30 +41,35 @@ function App() {
         </TopAppBar>
         <TopAppBarFixedAdjust></TopAppBarFixedAdjust>
 
-            <div className='row align-items-center' id='selectors-box'>
+        {/* Language Selectors */}
+        <div className='row align-items-center' id='selectors-box'>
 
-                    <div className='col-5 p-2' id='selectors-btn' align='center'>
-                        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </DropdownButton>
-                    </div>
-
-                    <div className='col-2 p-3' align='center'>
-                            <button type="button" className="btn btn-primary btn-sm" id="toggle-btn"><i className="material-icons">compare_arrows</i></button>
-                    </div>
-
-                    <div className='col-5 p-0' align='center'>
-                        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </DropdownButton>
-                    </div>
-
+            <div className='col-5 p-2' align='center'>
+                <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </DropdownButton>
             </div>
 
+            <div className='col-2 p-3' align='center'>
+                    <button type="button" className="btn btn-primary btn-sm" id="toggle-btn"><i className="material-icons">compare_arrows</i></button>
+            </div>
+
+            <div className='col-5 p-0' align='center'>
+                <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </DropdownButton>
+            </div>
+
+        </div>
+
+        {/* Translation Boxes */}
+        <div className="row">
+             <div className='shadow-sm p-3 bg-white rounded'></div>
+        </div>
     </div>
   );
 }
