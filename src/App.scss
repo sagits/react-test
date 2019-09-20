@@ -1,5 +1,4 @@
 
-/*using css only*/
 .mdc-top-app-bar {
     background-color: white !important;
 }
@@ -14,14 +13,29 @@
     letter-spacing: 0.1em !important;
 }
 
-.blueIcon {
-    color: blue !important;
+
+#selectors-box{
+    background-color: #1a73e8;
 }
 
+#selectors-btn {
+    padding: 10px;
+}
 
+#dropdown-basic-button {
+    padding: 10px;
+    color: #969696;
+    background-color: white;
+}
 
+.material-icons {
+    color: #969696;
+    padding: 1px;
+    font-size: 22px;
+    margin-top: 4px;
+}
 
-//using sass
-//.mdc-top-app-bar {
-//  @include mdc-top-app-bar-fill-color(#0000ff);
-//}
+.toggle-btn {
+    border-radius: 50%;
+    background-color: white;
+}
