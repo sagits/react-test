@@ -18,25 +18,31 @@ import MaterialIcon from '@material/react-material-icon';
 
 class App extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        value: 'Please write an essay about your favorite DOM element.'
-      };
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('An essay was submitted: ' + this.state.value);
-      event.preventDefault();
+        super(props);
+        this.state = {
+            value: ''
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    render () {
+    handleChange(event) {
+        //console.log('value', event.target.value);
+        this.setState({ value: event.target.value }, () => {
+            if (this.state.value.length >= 3) {
+                console.log('text to translate...', this.state.value);
+            }
+        });
+
+    }
+
+    handleSubmit(event) {
+        alert('An essay was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
         return (
             <div>
                 <TopAppBar>
@@ -66,7 +72,7 @@ class App extends React.Component {
 
                         {/* Dropdowns Box */}
                         <div className='row align-items-center' id='dropdowns-box'>
-                            <div className='col-5' align='center'>   
+                            <div className='col-5' align='center'>
                                 <DropdownButton id="dropdown-basic-button" title="Dropdown button">
                                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -90,12 +96,18 @@ class App extends React.Component {
                         </div>
 
                         {/* Input Box */}
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                <textarea value={this.state.value} onChange={this.handleChange} />
-                            </label>
-                            <input className="invisible" type="submit" value="Submit" />
-                        </form>
+                        <div className='row'>
+                            <div className='col-12 p-0'>
+                                <form onSubmit={this.handleSubmit}>
+                                    <div class="form-group">
+                                        <textarea placeholder="Type something..." value={this.state.value} onChange={this.handleChange} className="form-control"
+                                         id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <input className="invisible" type="submit" value="Submit" />
+                                </form>
+
+                            </div>
+                        </div>
 
                     </div>
 
