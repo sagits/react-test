@@ -17,15 +17,15 @@ import MaterialIcon from '@material/react-material-icon';
 
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
+
         this.state = {
             value: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    }    
 
     handleChange(event) {
         //console.log('value', event.target.value);
@@ -35,11 +35,6 @@ class App extends React.Component {
             }
         });
 
-    }
-
-    handleSubmit(event) {
-        alert('An essay was submitted: ' + this.state.value);
-        event.preventDefault();
     }
 
     render() {
@@ -81,7 +76,7 @@ class App extends React.Component {
                             </div>
 
                             <div className='col-2' align='center'>
-                                <Button variant="primary" size="sm" className="toggle-btn">
+                                <Button variant="primary" size="sm" id="toggle-btn">
                                     <i className="material-icons">compare_arrows</i>
                                 </Button>
                             </div>
@@ -98,22 +93,49 @@ class App extends React.Component {
                         {/* Input Box */}
                         <div className='row'>
                             <div className='col-12 p-0'>
-                                <form onSubmit={this.handleSubmit}>
-                                    <div class="form-group">
-                                        <textarea placeholder="Type something..." value={this.state.value} onChange={this.handleChange} className="form-control"
-                                         id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <form>
+                                    <div className="form-group">
+                                        <textarea 
+                                            className="form-control"
+                                            id="input-box" 
+                                            rows="3"
+                                            type="text"
+                                            autoFocus
+                                            value={this.state.teamId}
+                                            onChange={this.setTeamId}
+                                            onFocus={function(e) {
+                                                var val = e.target.value;
+                                                e.target.value = '';
+                                                e.target.value = val;
+                                            }}
+                                        >
+                                        </textarea>
                                     </div>
-                                    <input className="invisible" type="submit" value="Submit" />
                                 </form>
-
                             </div>
                         </div>
-
+                    
+                        {/* Translation Box */}
+                        <div className='row'>
+                            <div className='col-12 p-0'>
+                                <form>
+                                    <div className="form-group">
+                                        <textarea 
+                                            className="form-control"
+                                            id="translation-box" 
+                                            rows="3"
+                                            type="text"
+                                            readOnly
+                                        >
+                                        </textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                       
                     </div>
-
                 </TopAppBarFixedAdjust>
             </div>
-
         );
     }
 }
