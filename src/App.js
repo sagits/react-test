@@ -66,8 +66,8 @@ class App extends React.Component {
                     <div className='container-fluid'>
 
                         {/* Dropdowns Box */}
-                        <div className='row align-items-center' id='dropdowns-box'>
-                            <div className='col-5' align='center'>
+                        <div className='row' id='dropdowns-box'>
+                            <div className='col-5 p-0' align='center'>
                                 <DropdownButton id="dropdown-basic-button" title="Dropdown button">
                                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
@@ -81,7 +81,7 @@ class App extends React.Component {
                                 </Button>
                             </div>
 
-                            <div className='col-5' align='center'>
+                            <div className='col-5 p-0' align='center'>
                                 <DropdownButton id="dropdown-basic-button" title="Dropdown button">
                                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>

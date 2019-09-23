@@ -5,33 +5,55 @@
         font-size: 85%;
     }
 
-    .col-5 {
-        padding: 0px;
-    }
-
-    .col-2 {
-        padding: 2px;
+    #toggle-btn {
+        position: relative;
+        right: 6px;
     }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 700px) {
 
     #dropdowns-box {
-        max-width: 50%;
-        margin-left: 25%;
+        width: 60%;
+        margin-left: 20%;
         margin-top: 3%;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
 
     #input-box {
+        width: 70%;
         margin-left: 15%;
-        margin-right: 15%;
+        height: 100px;
     }
     
     #translation-box {
+        width: 70%;
         margin-left: 15%;
-        margin-right: 15%;
+        height: 100px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+
+    #dropdowns-box {
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 3%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    #input-box {
+        width: 60%;
+        margin-left: 20%;
+        height: 100px;
+    }
+    
+    #translation-box {
+        width: 60%;
+        margin-left: 20%;
+        height: 100px;
     }
 }
 
@@ -71,6 +93,10 @@
 #toggle-btn {
     border-radius: 50%;
     background-color: white;
+}
+
+.form-group {
+    margin-bottom: 0;
 }
 
 #input-box {
