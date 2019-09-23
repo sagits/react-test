@@ -109,6 +109,7 @@ class App extends React.Component {
                                                 e.target.value = val;
                                             }}
                                         >
+                                            Exemplo
                                         </textarea>
                                     </div>
                                 </form>
@@ -125,14 +126,29 @@ class App extends React.Component {
                                             id="translation-box" 
                                             rows="3"
                                             type="text"
+                                            value={this.state.teamId}
                                             readOnly
                                         >
+                                            Example
                                         </textarea>
                                     </div>
                                 </form>
                             </div>
                         </div>
                        
+                        {/* Translation Additionals */}
+                        <div className='row'>
+                            <div className='col-12 p-3 mt-2'>
+                                <div id="translation-adds">
+                                    <h6>Noun</h6>
+                                    <p>Example</p>
+                                    <h6>Verb</h6>
+                                    <p>To example <small>(present tense - see "Example" verb)</small></p>
+                                    <h6>Synonyms</h6>
+                                    <p>Example 1, example 2, example 3</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </TopAppBarFixedAdjust>
             </div>
