@@ -24,11 +24,13 @@ class App extends React.Component {
         super();
 
         this.state = {
-            value: ''
+            value: '',
+            showOptions: false
         };
 
         this.handleChange = this.handleChange.bind(this);
-    }    
+        this.showOrHideOptions = this.showOrHideOptions.bind(this);
+    }
 
     handleChange(event) {
         //console.log('value', event.target.value);
@@ -40,7 +42,23 @@ class App extends React.Component {
 
     }
 
+    showOrHideOptions() {
+        this.setState({ showOptions: !this.state.showOptions });
+    }
+
     render() {
+
+        var Options = function() {
+            return (
+                <div id="icons-menu-ext">
+                    <i className="material-icons ml-2">keyboard_voice</i>
+                    <FontAwesomeIcon icon={faPen} />
+                    <i className="material-icons ml-3">photo_camera</i>
+                    <i className="material-icons ml-3">insert_drive_file</i>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <TopAppBar>
@@ -98,19 +116,14 @@ class App extends React.Component {
                             <div className='col-12 p-0'>
                                 <form>
                                     <div className="form-group">
-                                        <textarea 
+                                        <textarea
                                             className="form-control"
-                                            id="input-box" 
+                                            id="input-box"
                                             rows="4"
                                             type="text"
                                             autoFocus
-                                            value={this.state.teamId}
-                                            onChange={this.setTeamId}
-                                            onFocus={function(e) {
-                                                var val = e.target.value;
-                                                e.target.value = '';
-                                                e.target.value = val;
-                                            }}
+                                            value={this.state.value}
+                                            onChange={this.handleChange}
                                         >
                                             Exemplo
                                         </textarea>
@@ -120,30 +133,28 @@ class App extends React.Component {
                         </div>
 
                         <div id="icons-menu">
-                            <i className="material-icons">history</i>  
-                            <Button variant="primary" size="sm" id="more-btn">
+                            <i className="material-icons">history</i>
+                            <Button variant="primary" size="sm" id="more-btn" onClick={this.showOrHideOptions}>
                                 <i className="material-icons">more_horiz</i>
                             </Button>
                         </div>
 
-                        <div id="icons-menu-ext">
-                            <i className="material-icons ml-2">keyboard_voice</i>
-                            <FontAwesomeIcon icon={faPen} />
-                            <i className="material-icons ml-3">photo_camera</i>
-                            <i className="material-icons ml-3">insert_drive_file</i>
-                        </div>
-                    
+                        {
+                            this.state.showOptions ? <Options /> : null
+                        }
+
+
                         {/* Translation Box */}
                         <div className='row'>
                             <div className='col-12 p-0'>
                                 <form>
                                     <div className="form-group">
-                                        <textarea 
+                                        <textarea
                                             className="form-control"
-                                            id="translation-box" 
+                                            id="translation-box"
                                             rows="3"
                                             type="text"
-                                            value={this.state.teamId}
+                                            value={this.state.translatedValue}
                                             readOnly
                                         >
                                             Example
@@ -152,7 +163,7 @@ class App extends React.Component {
                                 </form>
                             </div>
                         </div>
-                       
+
                         {/* Translation Additionals */}
                         <div className='row'>
                             <div className='col-12 p-3 mt-2'>
