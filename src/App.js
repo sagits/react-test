@@ -14,6 +14,9 @@ import TopAppBar, {
     TopAppBarTitle,
 } from '@material/react-top-app-bar';
 import MaterialIcon from '@material/react-material-icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
+
 
 
 class App extends React.Component {
@@ -98,7 +101,7 @@ class App extends React.Component {
                                         <textarea 
                                             className="form-control"
                                             id="input-box" 
-                                            rows="3"
+                                            rows="4"
                                             type="text"
                                             autoFocus
                                             value={this.state.teamId}
@@ -114,6 +117,20 @@ class App extends React.Component {
                                     </div>
                                 </form>
                             </div>
+                        </div>
+
+                        <div id="icons-menu">
+                            <i className="material-icons">history</i>  
+                            <Button variant="primary" size="sm" id="more-btn">
+                                <i className="material-icons">more_horiz</i>
+                            </Button>
+                        </div>
+
+                        <div id="icons-menu-ext">
+                            <i className="material-icons ml-2">keyboard_voice</i>
+                            <FontAwesomeIcon icon={faPen} />
+                            <i className="material-icons ml-3">photo_camera</i>
+                            <i className="material-icons ml-3">insert_drive_file</i>
                         </div>
                     
                         {/* Translation Box */}
