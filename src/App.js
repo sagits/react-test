@@ -34,9 +34,37 @@ class App extends React.Component {
 
     handleChange(event) {
         //console.log('value', event.target.value);
+        event.preventDefault();
+
         this.setState({ value: event.target.value }, () => {
             if (this.state.value.length >= 3) {
                 console.log('text to translate...', this.state.value);
+                fetch('https://translation.googleapis.com/language/translate/v2', {
+                    method: 'post',
+                    headers: {'Content-Type':'application/json'},
+                    body: {
+                        "q": [this.state.value],
+                        "target": "de"
+                    }
+                    .then(res => res.json())
+                    .then(
+                      (result) => {
+                        this.setState({
+                          isLoaded: true,
+                          translatedValue: result.data.translations[0]
+                        });
+                      },
+                      // Note: it's important to handle errors here
+                      // instead of a catch() block so that we don't swallow
+                      // exceptions from actual bugs in components.
+                      (error) => {
+                        this.setState({
+                          isLoaded: true,
+                          error
+                        });
+                      }
+                    )
+                });
             }
         });
 
@@ -125,7 +153,6 @@ class App extends React.Component {
                                             value={this.state.value}
                                             onChange={this.handleChange}
                                         >
-                                            Exemplo
                                         </textarea>
                                     </div>
                                 </form>
@@ -157,7 +184,6 @@ class App extends React.Component {
                                             value={this.state.translatedValue}
                                             readOnly
                                         >
-                                            Example
                                         </textarea>
                                     </div>
                                 </form>
