@@ -200,15 +200,16 @@ class App extends React.Component {
                             <div className='col-12 p-0'>
                                 <form>
                                     <div className="form-group">
-                                        <textarea
-                                            className="form-control"
+                                        <div
+                                            className="form-control translation-box"
                                             id="translation-box"
                                             rows="3"
                                             type="text"
-                                            value={this.state.translatedValue}
+                                            dangerouslySetInnerHTML={{ __html: this.state.translatedValue }}
                                             readOnly
                                         >
-                                        </textarea>
+                                           
+                                        </div>
                                     </div>
                                 </form>
                             </div>
