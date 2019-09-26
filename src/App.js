@@ -37,7 +37,7 @@ class App extends React.Component {
 
 
     translate() {
-        fetch('https://translation.googleapis.com/language/translate/v2', {
+        fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: {
@@ -82,33 +82,42 @@ class App extends React.Component {
         this.setState({ value: event.target.value }, () => {
             if (this.state.value.length >= 3) {
                 console.log('text to translate...', this.state.value);
-                fetch('https://translation.googleapis.com/language/translate/v2', {
+                fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI', {
                     method: 'post',
                     headers: {'Content-Type':'application/json'},
-                    key: 'AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI',
                     body: {
                         "q": [this.state.value],
                         "target": "de"
                     }
+                })
                     .then(res => res.json())
                     .then(
-                      (result) => {
-                        this.setState({
-                          isLoaded: true,
-                          translatedValue: result.data.translations[0]
-                        });
-                      },
-                      // Note: it's important to handle errors here
-                      // instead of a catch() block so that we don't swallow
-                      // exceptions from actual bugs in components.
-                      (error) => {
-                        this.setState({
-                          isLoaded: true,
-                          error
-                        });
-                      }
+                        (result) => {
+        
+                            if (result.data && result.data.translations && result.data.translations.length) {
+                                console.log('translate() success', result);
+                                //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
+                                this.setState({
+                                    isLoaded: true,
+                                    translatedValue: result.data.translations[0]
+                                });
+                            }
+                            else {
+                                //deu erro
+                                console.log('translate() error', result);
+                            }
+        
+                        },
+                        // Note: it's important to handle errors here
+                        // instead of a catch() block so that we don't swallow
+                        // exceptions from actual bugs in components.
+                        (error) => {
+                            this.setState({
+                                isLoaded: true,
+                                error
+                            });
+                        }
                     )
-                });
                 this.translate();
             }
         });
