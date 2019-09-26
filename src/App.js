@@ -16,6 +16,8 @@ import TopAppBar, {
 import MaterialIcon from '@material/react-material-icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
+import ReactFlagsSelect from 'react-flags-select';
+import 'react-flags-select/scss/react-flags-select.scss';
 
 
 
@@ -30,6 +32,7 @@ class App extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.showOrHideOptions = this.showOrHideOptions.bind(this);
+        this.ReactFlagsSelect = this.ReactFlagsSelect.bind(this);
     }
 
     handleChange(event) {
@@ -42,6 +45,7 @@ class App extends React.Component {
                 fetch('https://translation.googleapis.com/language/translate/v2', {
                     method: 'post',
                     headers: {'Content-Type':'application/json'},
+                    key: 'AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI',
                     body: {
                         "q": [this.state.value],
                         "target": "de"
@@ -72,6 +76,10 @@ class App extends React.Component {
 
     showOrHideOptions() {
         this.setState({ showOptions: !this.state.showOptions });
+    }
+
+    ReactFlagsSelect(){
+        this.setState({ flagSelect: !this.state.flagSelect});
     }
 
     render() {
@@ -131,13 +139,17 @@ class App extends React.Component {
                             </div>
 
                             <div className='col-5 p-0' align='center'>
-                                <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                </DropdownButton>
+                                <ReactFlagsSelect 
+                                    className="menu-flags" 
+                                    placeholder="Select Language"
+                                    //onClick={this.ReactFlagsSelect} 
+                                />
                             </div>
                         </div>
+
+                        {
+                            this.state.flagSelect ? <ReactFlagsSelect /> : null
+                        }
 
                         {/* Input Box */}
                         <div className='row'>
