@@ -35,46 +35,6 @@ class App extends React.Component {
         this.ReactFlagsSelect = this.ReactFlagsSelect.bind(this);
     }
 
-
-    translate() {
-        fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: {
-                "q": [this.state.value],
-                "target": "de"
-            }
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-
-                    if (result.data && result.data.translations && result.data.translations.length) {
-                        console.log('translate() success', result);
-                        //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
-                        this.setState({
-                            isLoaded: true,
-                            translatedValue: result.data.translations[0]
-                        });
-                    }
-                    else {
-                        //deu erro
-                        console.log('translate() error', result);
-                    }
-
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-    }
-
     handleChange(event) {
         //console.log('value', event.target.value);
         event.preventDefault();
@@ -82,24 +42,27 @@ class App extends React.Component {
         this.setState({ value: event.target.value }, () => {
             if (this.state.value.length >= 3) {
                 console.log('text to translate...', this.state.value);
-                fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyDdeubhkerT69SDdjTRoeoHzEbbBZJ4wqI', {
+                fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyA4KzqQDZwPBNF52RKr7iXvrM8Mt0dMAYI', {
                     method: 'post',
                     headers: {'Content-Type':'application/json'},
-                    body: {
+                    body:  JSON.stringify({
                         "q": [this.state.value],
-                        "target": "de"
-                    }
+                        "source": "pt-br",
+                        "target": "eng"
+                    })
                 })
                     .then(res => res.json())
                     .then(
                         (result) => {
+
+                            console.log(this.convertUnicode(result.data.translations[0].translatedText));
         
                             if (result.data && result.data.translations && result.data.translations.length) {
                                 console.log('translate() success', result);
                                 //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
                                 this.setState({
                                     isLoaded: true,
-                                    translatedValue: result.data.translations[0]
+                                    translatedValue: result.data.translations[0].translatedText
                                 });
                             }
                             else {
@@ -118,12 +81,12 @@ class App extends React.Component {
                             });
                         }
                     )
-                this.translate();
             }
         });
 
     }
 
+    
     showOrHideOptions() {
         this.setState({ showOptions: !this.state.showOptions });
     }
@@ -171,7 +134,6 @@ class App extends React.Component {
                 {/* Content */}
                 <TopAppBarFixedAdjust>
                     <div className='container-fluid'>
-
                         {/* Dropdowns Box */}
                         <div className='row' id='dropdowns-box'>
                             <div className='col-5 p-0' align='center'>
