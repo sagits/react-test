@@ -35,6 +35,46 @@ class App extends React.Component {
         this.ReactFlagsSelect = this.ReactFlagsSelect.bind(this);
     }
 
+
+    translate() {
+        fetch('https://translation.googleapis.com/language/translate/v2', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "q": [this.state.value],
+                "target": "de"
+            }
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+
+                    if (result.data && result.data.translations && result.data.translations.length) {
+                        console.log('translate() success', result);
+                        //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
+                        this.setState({
+                            isLoaded: true,
+                            translatedValue: result.data.translations[0]
+                        });
+                    }
+                    else {
+                        //deu erro
+                        console.log('translate() error', result);
+                    }
+
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
     handleChange(event) {
         //console.log('value', event.target.value);
         event.preventDefault();
@@ -69,6 +109,7 @@ class App extends React.Component {
                       }
                     )
                 });
+                this.translate();
             }
         });
 
@@ -84,7 +125,7 @@ class App extends React.Component {
 
     render() {
 
-        var Options = function() {
+        var Options = function () {
             return (
                 <div id="icons-menu-ext">
                     <i className="material-icons ml-2">keyboard_voice</i>
