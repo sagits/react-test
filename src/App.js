@@ -55,7 +55,7 @@ class App extends React.Component {
                     .then(
                         (result) => {
 
-                            console.log(this.convertUnicode(result.data.translations[0].translatedText));
+                            console.log(result.data.translations[0].translatedText);
         
                             if (result.data && result.data.translations && result.data.translations.length) {
                                 console.log('translate() success', result);
