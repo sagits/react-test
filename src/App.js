@@ -1,8 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import './App.scss';
 import '@material/react-top-app-bar/dist/top-app-bar.css';
 import '@material/react-material-icon/dist/material-icon.css';
@@ -18,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import ReactFlagsSelect from 'react-flags-select';
 import 'react-flags-select/scss/react-flags-select.scss';
+import _ from 'underscore';
 
 
 
@@ -30,9 +29,61 @@ class App extends React.Component {
             showOptions: false
         };
 
+        this.translateDebounceFunction = _.debounce(function () {
+            this.translate();
+        },500);
+
         this.handleChange = this.handleChange.bind(this);
         this.showOrHideOptions = this.showOrHideOptions.bind(this);
-        this.ReactFlagsSelect = this.ReactFlagsSelect.bind(this);
+    }
+
+    translate () {
+        fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyA4KzqQDZwPBNF52RKr7iXvrM8Mt0dMAYI', {
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body:  JSON.stringify({
+                "q": [this.state.value],
+                //"source": "pt-br",
+                "target": "eng"
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+
+                    console.log(result.data.translations[0].translatedText);
+                    console.log(result.data.translations[0].detectedSourceLanguage);
+
+                    if (result.data && result.data.translations && result.data.translations.length) {
+                        console.log('translate() success', result);
+                        //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
+                        this.setState({
+                            isLoaded: true,
+                            translatedValue: result.data.translations[0].translatedText,
+                            selectedLanguage: result.data.translations[0].detectedSourceLanguage
+                        },
+                            () => {
+                                this.refs.userFlag.updateSelected(this.state.selectedLanguage.toUpperCase());
+                                this.setState({});
+                            }
+                        );
+                    }
+                    else {
+                        //deu erro
+                        console.log('translate() error', result);
+                    }
+
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
     }
 
     handleChange(event) {
@@ -42,48 +93,9 @@ class App extends React.Component {
         this.setState({ value: event.target.value }, () => {
             if (this.state.value.length >= 3) {
                 console.log('text to translate...', this.state.value);
-                fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyA4KzqQDZwPBNF52RKr7iXvrM8Mt0dMAYI', {
-                    method: 'post',
-                    headers: {'Content-Type':'application/json'},
-                    body:  JSON.stringify({
-                        "q": [this.state.value],
-                        "source": "pt-br",
-                        "target": "eng"
-                    })
-                })
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-
-                            console.log(result.data.translations[0].translatedText);
-        
-                            if (result.data && result.data.translations && result.data.translations.length) {
-                                console.log('translate() success', result);
-                                //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
-                                this.setState({
-                                    isLoaded: true,
-                                    translatedValue: result.data.translations[0].translatedText
-                                });
-                            }
-                            else {
-                                //deu erro
-                                console.log('translate() error', result);
-                            }
-        
-                        },
-                        // Note: it's important to handle errors here
-                        // instead of a catch() block so that we don't swallow
-                        // exceptions from actual bugs in components.
-                        (error) => {
-                            this.setState({
-                                isLoaded: true,
-                                error
-                            });
-                        }
-                    )
+                this.translateDebounceFunction();
             }
         });
-
     }
 
     
@@ -91,8 +103,10 @@ class App extends React.Component {
         this.setState({ showOptions: !this.state.showOptions });
     }
 
-    ReactFlagsSelect(){
-        this.setState({ flagSelect: !this.state.flagSelect});
+    onSelectFlag(countryCode){
+        this.setState({
+            selectedLanguage: countryCode
+        });
     }
 
     render() {
@@ -134,14 +148,16 @@ class App extends React.Component {
                 {/* Content */}
                 <TopAppBarFixedAdjust>
                     <div className='container-fluid'>
+
                         {/* Dropdowns Box */}
                         <div className='row' id='dropdowns-box'>
                             <div className='col-5 p-0' align='center'>
-                                <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                </DropdownButton>
+                                <ReactFlagsSelect 
+                                    className="menu-flags" 
+                                    placeholder="Detect Language"
+                                    ref="userFlag"
+                                    onSelect={this.onSelectFlag}
+                                />
                             </div>
 
                             <div className='col-2' align='center'>
@@ -154,14 +170,10 @@ class App extends React.Component {
                                 <ReactFlagsSelect 
                                     className="menu-flags" 
                                     placeholder="Select Language"
-                                    //onClick={this.ReactFlagsSelect} 
+                                    searchable={true}
                                 />
                             </div>
                         </div>
-
-                        {
-                            this.state.flagSelect ? <ReactFlagsSelect /> : null
-                        }
 
                         {/* Input Box */}
                         <div className='row'>
