@@ -23,11 +23,11 @@ import _ from 'underscore';
 class App extends React.Component {
     constructor() {
         super();
-
         this.state = {
-            value: '',
+            value: 'vill du ta ett kaffe med mig imorgon?',
             showOptions: false
         };
+        this.translate();
 
         this.translateDebounceFunction = _.debounce(function () {
             this.translate();
@@ -35,6 +35,7 @@ class App extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.showOrHideOptions = this.showOrHideOptions.bind(this);
+        this.onSelectFlag = this.onSelectFlag.bind(this);
     }
 
     translate () {
@@ -51,18 +52,22 @@ class App extends React.Component {
             .then(
                 (result) => {
 
-                    console.log(result.data.translations[0].translatedText);
-                    console.log(result.data.translations[0].detectedSourceLanguage);
+          
 
                     if (result.data && result.data.translations && result.data.translations.length) {
+                        console.log(result.data.translations[0].translatedText);
+                        console.log(result.data.translations[0].detectedSourceLanguage);
+
                         console.log('translate() success', result);
-                        //deu certo e trouxe resultados (pode ter dado certo a requisição mas vc passou um texto que não tem tradução)
+                        //deu certo e trouxe resultados (pode ter .toUpperCase()dado certo a requisição mas vc passou um texto que não tem tradução)
                         this.setState({
                             isLoaded: true,
                             translatedValue: result.data.translations[0].translatedText,
-                            selectedLanguage: result.data.translations[0].detectedSourceLanguage
+                            selectedLanguage: result.data.translations[0].detectedSourceLanguage,
+                            translatedLanguage: "us"
                         },
                             () => {
+                                this.refs.userFlag2.updateSelected(this.state.translatedLanguage.toUpperCase().toUpperCase());
                                 this.refs.userFlag.updateSelected(this.state.selectedLanguage.toUpperCase());
                                 this.setState({});
                             }
@@ -169,6 +174,7 @@ class App extends React.Component {
                             <div className='col-5 p-0' align='center'>
                                 <ReactFlagsSelect 
                                     className="menu-flags" 
+                                    ref="userFlag2"
                                     placeholder="Select Language"
                                     searchable={true}
                                 />
